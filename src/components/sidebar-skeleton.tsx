@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export function SidebarSkeleton() {
     return (
-        <aside className="bg-[#F8F8F7] w-[300px] min-h-screen shadow-sidebar p-1 z-20 fixed top-0">
+        <aside className="bg-[#F8F8F7] w-[var(--sidebar-width,300px)] min-h-screen shadow-sidebar p-1 z-20 fixed top-0">
             <div className="space-y-4 p-3">
                 <Skeleton className="w-12 h-12 rounded-full" />
 

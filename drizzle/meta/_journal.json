@@ -57,6 +57,13 @@
       "when": 1743883380299,
       "tag": "0007_military_luckman",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1782346378266,
+      "tag": "0008_aromatic_gorgon",
+      "breakpoints": true
     }
   ]
 }

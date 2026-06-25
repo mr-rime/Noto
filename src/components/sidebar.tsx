@@ -7,12 +7,14 @@ import TrashList from "./trash-list";
 import SearchItem from "./search-item";
 import { auth } from "@clerk/nextjs/server";
 import { getRootPages } from "@/lib/get-pages";
+import SidebarResizer from "./sidebar-resizer";
 
 export default async function Sidebar() {
     const user = await auth()
     const pages = await getRootPages(user.userId!)
     return (
-        <aside className="bg-[#F8F8F7] w-[300px] min-h-screen shadow-sidebar p-1 z-20 fixed top-0">
+        <aside className="bg-[#F8F8F7] w-[var(--sidebar-width,300px)] min-h-screen shadow-sidebar p-1 z-20 fixed top-0 group/sidebar">
+            <SidebarResizer />
             <div>
                 <UserAvatar />
                 <SidebarItem>

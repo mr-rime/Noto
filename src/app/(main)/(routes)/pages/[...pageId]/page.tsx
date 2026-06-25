@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: Promise<{ pageId: strin
     if (!page) return <NotFound />;
 
     return (
-        <div className="w-full ml-[18.7rem]">
+        <div className="w-full ml-[var(--sidebar-width,300px)]">
             <div>
                 <NotoPageHeader page={page as any} />
                 {page.isArchived && <DeletedBanner />}

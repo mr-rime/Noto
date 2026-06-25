@@ -15,7 +15,7 @@ export default function PageContentWrapper({ page, pageId, userId }: {
     userId: string
 }) {
     return (
-        <div className="w-full ml-[18.7rem]">
+        <div className="w-full ml-[var(--sidebar-width,300px)]">
             <div>
                 <NotoPageHeader page={page} />
                 {page.isArchived && <DeletedBanner />}
@@ -29,7 +29,7 @@ export default function PageContentWrapper({ page, pageId, userId }: {
                 >
                     <NotoPageIcon page={page} />
                     <Suspense fallback={
-                        <div className="flex items-center w-full ml-[18.7rem]">
+                        <div className="flex items-center w-full ml-[var(--sidebar-width,300px)]">
                             <NotoPageContentSkeleton />
                         </div>
                     }>
