@@ -29,4 +29,6 @@ jobs:
       - name: Run keep-alive script
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: pnpm dlx tsx scripts/keep-db-alive.ts
+        run: pnpm dlx tsx scripts/keep-db-alive.ts\
+      - name: Print trigger
+        run: echo "Triggered by ${{ github.event_name }}"
