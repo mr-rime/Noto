@@ -6,6 +6,8 @@ import ModalProvider from "./modal-provider";
 import { PageType } from "@/types";
 import { usePagesList } from "@/hooks/use-pages-list";
 
+const MAX_PAGES = 4
+
 export default function PagesList({ pages }: { pages: PageType[] }) {
     const { pagesList, setPagesList } = usePagesList();
 
@@ -13,9 +15,12 @@ export default function PagesList({ pages }: { pages: PageType[] }) {
         setPagesList(pages);
     }, [pages, setPagesList]);
 
+    const visiblePages = pagesList.slice(0, MAX_PAGES)
+    const isAtLimit = pagesList.length >= MAX_PAGES
+
     return (
         <div className="flex flex-col space-y-1">
-            {pagesList.map((page) => (
+            {visiblePages.map((page) => (
                 <NotoPage key={page.id} {...page as any} />
             ))}
 

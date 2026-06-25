@@ -9,22 +9,63 @@ import { cn } from "@/lib/cn"
 import { usePathname } from "next/navigation"
 import { useDocuments } from "@/hooks/use-documents"
 import ControlMenu from "./control-menu"
-import { useMemo, useState } from "react"
+import { useMemo, useState, useCallback } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { createPageInside } from "@/actions"
 import { useUser } from "@clerk/nextjs"
 import { useIcon } from "@/hooks/use-icon"
+import { usePagesList, addOptimisticChildToTree, replaceOptimisticChildInTree } from "@/hooks/use-pages-list"
+import { toast } from "sonner"
 
 export interface NotoPageProps extends PageType {
   empty?: boolean
+  depth?: number
 }
 
-
-export default function NotoPage({ id, title, icon, children }: NotoPageProps) {
+export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoPageProps) {
   const [open, setOpen] = useState(false)
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const pagesList = usePagesList()
+
   const { mutateAsync } = useMutation({
-    mutationFn: createPageInside
+    mutationFn: createPageInside,
+    onMutate: async () => {
+        const tempId = `temp-${Date.now()}`
+        
+        const optimisticPage: PageType = {
+            id: tempId,
+            title: "New Page",
+            auth_id: user?.id!,
+            isArchived: false,
+            content: [],
+            type: 'empty',
+            isPublished: false,
+            created_at: new Date(),
+            updated_at: new Date(),
+            children: [],
+        }
+
+        const previousPages = usePagesList.getState().pagesList
+        
+        usePagesList.getState().setPagesList(addOptimisticChildToTree(previousPages, id!, optimisticPage))
+
+        setIsCollapsed(true)
+        
+        return { previousPages, tempId }
+    },
+    onSuccess: (data, _variables, context) => {
+        const current = usePagesList.getState().pagesList
+        const realChild = { children: [], ...(data as any) }
+        usePagesList.getState().setPagesList(
+            replaceOptimisticChildInTree(current, id!, context?.tempId!, realChild)
+        )
+    },
+    onError: (_err, _variables, context) => {
+        if (context?.previousPages) {
+            usePagesList.getState().setPagesList(context.previousPages)
+        }
+        toast.error("Failed to create nested page")
+    }
   })
   const { user } = useUser()
   const emoji = useIcon()
@@ -43,13 +84,13 @@ export default function NotoPage({ id, title, icon, children }: NotoPageProps) {
     onOpen()
   }
 
-  const handleAddPageInside = async (e: React.MouseEvent) => {
+  const doAddPageInside = useCallback(async (e: React.MouseEvent) => {
     e.preventDefault()
     await mutateAsync({
       auth_id: user?.id!,
       parentId: id!
     })
-  }
+  }, [user, id, mutateAsync])
 
   const onCollapse = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -58,11 +99,25 @@ export default function NotoPage({ id, title, icon, children }: NotoPageProps) {
 
 
   const memoizedChildrenList = useMemo(() => {
-    if (children?.length === 0) return <div className="text-[#989793] text-[13px] w-fit mt-1 ml-3 select-none">
+    const liveChildren = pagesList.pagesList
+      ? (function findChildren(pages: PageType[]): PageType[] | undefined {
+          for (const p of pages) {
+            if (p.id === id) return p.children
+            if (p.children?.length) {
+              const found = findChildren(p.children)
+              if (found !== undefined) return found
+            }
+          }
+        })(pagesList.pagesList)
+      : children
+
+    const resolvedChildren = liveChildren ?? children
+
+    if (!resolvedChildren || resolvedChildren.length === 0) return <div className="text-[#989793] text-[13px] w-fit mt-1 ml-3 select-none">
       No pages inside
     </div>
-    return children?.map((page) => <NotoPage key={page.id} {...page} />)
-  }, [children])
+    return resolvedChildren.map((page) => <NotoPage key={page.id} {...page} depth={depth + 1} />)
+  }, [pagesList.pagesList, id, depth])
 
   return (
     <>
@@ -87,7 +142,7 @@ export default function NotoPage({ id, title, icon, children }: NotoPageProps) {
               </div>
             </div>
             <div className="truncate text-[#5E5C57] w-[150px]">
-              {currentTitle || "New page"}
+              {currentTitle || "New Page"}
             </div>
           </div>
 
@@ -103,14 +158,16 @@ export default function NotoPage({ id, title, icon, children }: NotoPageProps) {
                 </div>
               </ControlMenu>
             </NotoTooltip>
-            <NotoTooltip content="Add a page inside">
-              <div
-                className="hover:bg-[#E8E8E8] h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
-                onClick={handleAddPageInside}
-              >
-                {icons.plus}
-              </div>
-            </NotoTooltip>
+            {depth < 3 && (
+              <NotoTooltip content="Add a page inside">
+                <div
+                  className="hover:bg-[#E8E8E8] h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                  onClick={doAddPageInside}
+                >
+                  {icons.plus}
+                </div>
+              </NotoTooltip>
+            )}
 
           </div>
         </SidebarItem>

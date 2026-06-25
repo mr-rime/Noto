@@ -50,14 +50,14 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
                 !page.isArchived && page.auth_id === user?.id ? <>
                     {
                         isEditable ?
-                            <Input onBlur={() => setIsEditable(false)} onChange={handleChange} autoFocus defaultValue={page.title || "New page"} className="w-[100px] h-[25px] rounded-[6px]" placeholder="New page" />
+                            <Input onBlur={() => setIsEditable(false)} onChange={handleChange} autoFocus defaultValue={page.title || "New Page"} className="w-[100px] h-[25px] rounded-[6px]" placeholder="New Page" />
                             :
                             <div onClick={() => setIsEditable(true)} className="hover:bg-[#F0F0EF] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px]">
                                 <span>
                                     {(emoji.pageId === page.id && emoji.icon) || page.icon}
                                 </span>
                                 <span>
-                                    {newTitle || "New page"}
+                                    {newTitle || "New Page"}
                                 </span>
                             </div>
                     }
@@ -66,7 +66,7 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
                         {(emoji.pageId === page.id && emoji.icon) || page.icon}
                     </span>
                     <span>
-                        {newTitle || "New page"}
+                        {newTitle || "New Page"}
                     </span>
                 </div>
             }

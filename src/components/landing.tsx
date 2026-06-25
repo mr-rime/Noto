@@ -31,7 +31,7 @@ export default function Landing() {
                         <SignedIn >
                             <Link href="/pages" replace>
                                 <Button className="cursor-pointer rounded-[5px] mt-5">
-                                    Get Noto free
+                                    Get started →
                                 </Button>
                             </Link>
                         </SignedIn>

@@ -31,13 +31,8 @@ export default function LandingHeader() {
 
                 <SignedIn>
                     <Link href="/pages" replace>
-                        <Button className="cursor-pointer mr-2 h-[30px] rounded-[5px] max-sm:hidden" variant="ghost">
-                            Log in
-                        </Button>
-                    </Link>
-                    <Link href="/pages" replace>
                         <Button className="cursor-pointer h-[30px] rounded-[5px]">
-                            Get Noto free
+                            Get started →
                         </Button>
                     </Link>
                 </SignedIn>

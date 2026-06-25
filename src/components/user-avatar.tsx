@@ -13,6 +13,8 @@ import { useParams, useRouter } from "next/navigation"
 import { usePagesList } from "@/hooks/use-pages-list"
 import { PageType } from "@/types"
 
+const MAX_PAGES = 4
+
 export default function UserAvatar() {
     const router = useRouter()
     const { user } = useUser()
@@ -38,16 +40,17 @@ export default function UserAvatar() {
                 updated_at: new Date(),
                 children: [],
             }
-            const previousPages = pagesList.pagesList
+        const previousPages = usePagesList.getState().pagesList
 
-            pagesList.setPagesList([optimisticPage, ...previousPages])
+            usePagesList.getState().setPagesList([...previousPages, optimisticPage])
 
             return { previousPages, tempId }
         },
         onSuccess: (data, _variables, context) => {
-            pagesList.setPagesList([
-                { ...data as any},
-                ...pagesList.pagesList.filter((p) => p.id !== context?.tempId),
+            const current = usePagesList.getState().pagesList
+            usePagesList.getState().setPagesList([
+                ...current.filter((p) => p.id !== context?.tempId),
+                { children: [], ...(data as any) },
             ])
 
             router.push(`/pages/${data.id}`)
@@ -55,18 +58,23 @@ export default function UserAvatar() {
         },
         onError: (_err, _variables, context) => {
             if (context?.previousPages) {
-                pagesList.setPagesList(context.previousPages)
+                usePagesList.getState().setPagesList(context.previousPages)
             }
             toast.error("Failed to create page")
         },
     })
 
+    const isAtLimit = pagesList.pagesList.length >= MAX_PAGES
+
     const handleMutate = useCallback(async () => {
+        if (usePagesList.getState().pagesList.length >= MAX_PAGES) {
+            toast.error(`You can only have ${MAX_PAGES} pages at the top level`)
+            return
+        }
         await mutateAsync({
-            title: 'New page',
+            title: 'New Page',
             auth_id: user?.id!,
             currentPageId: pageId?.[0],
-
         })
     }, [user, mutateAsync, pageId])
 
@@ -78,8 +86,15 @@ export default function UserAvatar() {
                     {user?.fullName || user?.firstName}
                 </span>
             </div>
-            <NotoTooltip content="Create a new page">
-                <div onClick={handleMutate} className="hover:bg-[#E8E8E8] h-[28px] w-[28px] rounded-[6px] flex items-center justify-center transition-colors">
+            <NotoTooltip content={isAtLimit ? `Page limit reached (max ${MAX_PAGES})` : "Create a new page"}>
+                <div
+                    onClick={() => handleMutate()}
+                    className={`h-[28px] w-[28px] rounded-[6px] flex items-center justify-center transition-colors ${
+                        isAtLimit
+                            ? "opacity-30 cursor-not-allowed"
+                            : "hover:bg-[#E8E8E8] cursor-pointer"
+                    }`}
+                >
                     <span>{icons.compose}</span>
                 </div>
             </NotoTooltip>

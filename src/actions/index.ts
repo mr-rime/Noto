@@ -105,19 +105,53 @@ export const moveToPage = async ({ id, pageId }: { id: string, pageId: string })
     }
 };
 
+export const duplicatePage = async ({ id, auth_id }: { id: string; auth_id: string }) => {
+    try {
+        const source = await db.query.pagesTable.findFirst({
+            where: (pages, { eq, and }) => and(eq(pages.id, id), eq(pages.auth_id, auth_id)),
+        });
+
+        if (!source) throw new Error("Page not found");
+
+        const data = await db
+            .insert(pagesTable)
+            .values({
+                auth_id: source.auth_id,
+                title: `${source.title} (copy)`,
+                content: source.content as any,
+                type: source.type,
+                icon: source.icon ?? undefined,
+                coverUrl: source.coverUrl ?? undefined,
+                parent_id: source.parent_id ?? undefined,
+                isArchived: false,
+                isPublished: false,
+            })
+            .returning();
+
+        revalidatePath("/pages");
+        if (source.parent_id) revalidatePath(`/pages/${source.parent_id}`);
+
+        return data[0];
+    } catch (err: any) {
+        throw new Error(err);
+    }
+};
+
 export const createPageInside = async ({ parentId, auth_id }: { parentId: string, auth_id: string }) => {
     try {
-        await db
+        const data = await db
             .insert(pagesTable)
             .values({
                 auth_id,
                 title: "New Page",
                 parent_id: parentId,
             })
-            .returning({ id: pagesTable.id });
+            .returning();
 
         revalidatePath(`/pages/${parentId}`);
         revalidatePath(`pages`);
+
+        return data[0];
     } catch (err: any) {
         throw new Error(err);
     }
