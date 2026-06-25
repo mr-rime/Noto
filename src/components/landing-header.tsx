@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -9,8 +10,9 @@ import {
 
 export default function LandingHeader() {
     return (
-        <header className="flex justify-between items-center p-4">
-            <div className="font-bold">
+        <header className="flex justify-between items-center py-4 px-10">
+            <div className="flex items-center gap-2 font-bold text-xl">
+                <Image src="/logo.png" alt="Noto Logo" width={40} height={40} />
                 Noto
             </div>
 

@@ -32,7 +32,6 @@ function PageCard({ page }: { page: PageType }) {
     return (
         <Link href={href} prefetch>
             <div className="group relative flex flex-col rounded-[8px] border border-[#EDEDEC] hover:border-[#D3D2D0] hover:shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-150 overflow-hidden bg-white cursor-pointer">
-                {/* Cover / color block */}
                 <div className={`h-[80px] w-full flex-shrink-0 ${page.coverUrl ? "" : "bg-[#F7F7F5]"}`}>
                     {page.coverUrl && (
                         <Image
@@ -46,7 +45,6 @@ function PageCard({ page }: { page: PageType }) {
                     )}
                 </div>
 
-                {/* Body */}
                 <div className="px-[14px] pt-[10px] pb-[12px] flex flex-col gap-1 min-w-0">
                     <div className="flex items-center gap-1.5 min-w-0">
                         <span className="text-[16px] leading-none shrink-0">
@@ -73,7 +71,6 @@ function PageCard({ page }: { page: PageType }) {
 export default async function HomePage() {
     const user = await currentUser()
 
-    // Ensure user row exists
     await db.insert(usersTable).values({
         auth_id: user?.id!,
         email: user?.primaryEmailAddress?.emailAddress || "",

@@ -7,6 +7,7 @@ import { updatePage } from "@/actions"
 import { useCallback, useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { useIcon } from "@/hooks/use-icon"
+import { usePagesList, updateNodeInTree } from "@/hooks/use-pages-list"
 
 type NotoPageIconProps = {
     page: PageType
@@ -26,12 +27,15 @@ export default function NotoPageIcon({ page }: NotoPageIconProps) {
     const handleUpdateIcon = useCallback(async (icon: string) => {
         emoji.setIcon(icon, page.id!)
         setOpen(false)
+        const { pagesList, setPagesList } = usePagesList.getState()
+        setPagesList(updateNodeInTree(pagesList, page.id!, { icon }))
+        
         await mutateAsync({
             id: page.id!,
             icon,
             auth_id: user?.id
         })
-    }, [mutateAsync, user?.id])
+    }, [mutateAsync, user?.id, page.id])
 
     return (
         (page.auth_id === user?.id) ? <>

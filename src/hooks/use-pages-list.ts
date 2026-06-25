@@ -53,3 +53,18 @@ export const removeNodeFromTree = (pages: PageType[], idToRemove: string): PageT
         children: page.children ? removeNodeFromTree(page.children, idToRemove) : []
     }));
 };
+
+export const updateNodeInTree = (pages: PageType[], idToUpdate: string, updates: Partial<PageType>): PageType[] => {
+    return pages.map(page => {
+        if (page.id === idToUpdate) {
+            return { ...page, ...updates };
+        }
+        if (page.children && page.children.length > 0) {
+            return {
+                ...page,
+                children: updateNodeInTree(page.children, idToUpdate, updates)
+            };
+        }
+        return page;
+    });
+};
