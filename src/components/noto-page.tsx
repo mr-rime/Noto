@@ -128,7 +128,7 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
   return (
     <>
       <Link prefetch href={`/pages/${id}`}>
-        <SidebarItem className={cn("hover:!text-[#5E5C57] text-[#91918E] text-[13px] font-semibold px-2 group truncate ", pathname.includes(id!) ? "bg-[#F0F0EF] text-[#5E5C57]" : "")} >
+        <SidebarItem className={cn("hover:!text-[#5E5C57] dark:hover:!text-[#e8e8e7] text-[#91918E] text-[13px] font-semibold px-2 group truncate ", pathname.includes(id!) ? "bg-[#F0F0EF] dark:bg-[#2d2d2d] text-[#5E5C57] dark:text-[#e8e8e7]" : "")} >
           <div className="flex items-center space-x-2">
             <div className="relative w-5 h-5 group">
               <div className="absolute inset-0 transition-opacity duration-200 group-hover:opacity-0 flex items-center justify-center">
@@ -137,11 +137,11 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
 
               <div
                 onClick={onCollapse}
-                className="absolute inset-0 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-[#e5e5e4] flex items-center justify-center rounded cursor-pointer"
+                className="absolute inset-0 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-[#e5e5e4] dark:hover:bg-[#3a3a3a] flex items-center justify-center rounded cursor-pointer"
               >
                 <span
                   className={`transition-transform duration-300 ease-in-out ${!isCollapsed ? "rotate-0" : "rotate-90"
-                    }`}
+                    } text-[#37352F] dark:text-white`}
                 >
                   {icons.chevronDownRoundedThick}
                 </span>
@@ -156,7 +156,7 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
             <NotoTooltip content="Delete, duplicate, and more...">
               <ControlMenu pageId={id!} open={open} onOpen={onOpen}>
                 <div
-                  className="hover:bg-[#E8E8E8] h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 cursor-pointer"
+                  className="hover:bg-[#E8E8E8] dark:hover:bg-[#2d2d2d] h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 cursor-pointer text-[#474644] dark:text-[#e8e8e7]"
 
                   onClick={handleOpenControlMenu}
                 >
@@ -167,8 +167,8 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
             {depth < 4 && (
               <NotoTooltip content={resolvedChildren && resolvedChildren.length >= 4 ? "Page limit reached (max 4)" : "Add a page inside"}>
                 <div
-                  className={cn("h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100",
-                    resolvedChildren && resolvedChildren.length >= 4 ? "opacity-30 cursor-not-allowed" : "hover:bg-[#E8E8E8] cursor-pointer"
+                  className={cn("h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 text-[#474644] dark:text-[#e8e8e7]",
+                    resolvedChildren && resolvedChildren.length >= 4 ? "opacity-30 cursor-not-allowed" : "hover:bg-[#E8E8E8] dark:hover:bg-[#2d2d2d] cursor-pointer"
                   )}
                   onClick={doAddPageInside}
                 >

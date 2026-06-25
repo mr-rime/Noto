@@ -45,14 +45,14 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
     useKey({ keys: "Enter", handler: handleUpdatePage });
 
     return (
-        <div className="h-[44px] pl-[12px] pr-[10px] flex items-center justify-between overflow-hidden sticky left-0 top-0 z-50 bg-white ">
+        <div className="h-[44px] pl-[12px] pr-[10px] flex items-center justify-between overflow-hidden sticky left-0 top-0 z-50 bg-white dark:bg-[#1F1F1F] border-b border-transparent dark:border-[#2d2d2d]">
             {
                 !page.isArchived && page.auth_id === user?.id ? <>
                     {
                         isEditable ?
                             <Input onBlur={() => setIsEditable(false)} onChange={handleChange} autoFocus defaultValue={page.title || "New Page"} className="w-[100px] h-[25px] rounded-[6px]" placeholder="New Page" />
                             :
-                            <div onClick={() => setIsEditable(true)} className="hover:bg-[#F0F0EF] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px]">
+                            <div onClick={() => setIsEditable(true)} className="hover:bg-[#F0F0EF] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px] dark:text-white">
                                 <span>
                                     {(emoji.pageId === page.id && emoji.icon) || page.icon}
                                 </span>
@@ -61,7 +61,7 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
                                 </span>
                             </div>
                     }
-                </> : <div className="hover:bg-[#F0F0EF] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px]">
+                </> : <div className="hover:bg-[#F0F0EF] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px] dark:text-white">
                     <span>
                         {(emoji.pageId === page.id && emoji.icon) || page.icon}
                     </span>
@@ -72,14 +72,14 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
             }
 
             <div className="flex items-center px-5">
-                <div className="text-[#9E9A97] px-3">
+                <div className="text-[#9E9A97] dark:text-white px-3">
                     {
                         isSaving ? "Editing..." : "Edited"
                     }
                 </div>
                 {
                     page.auth_id === user?.id && !page.isArchived && <PublishMenu page={page}>
-                        <div className="hover:bg-[#F0F0EF] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px]">
+                        <div className="hover:bg-[#F0F0EF] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px] dark:text-white">
                             Share
                         </div>
                     </PublishMenu>

@@ -21,7 +21,7 @@ export default async function page({ params }: { params: Promise<{ pageId: strin
     if (!page.isPublished && page.auth_id !== user?.id) return <NotFound />
 
     return (
-        <div className="w-full ml-[var(--sidebar-width,300px)]">
+        <div className="w-full ml-[var(--sidebar-width,300px)] min-h-screen bg-white dark:bg-[#1F1F1F]">
 
             <div>
                 <NotoPageHeader page={page as any} />

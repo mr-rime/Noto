@@ -71,15 +71,15 @@ export default function NotoPageTitleEditor({ page }: NotoPageTitleEditorProps) 
       {
         !page.isArchived && page.auth_id === user?.id && <div className="flex items-center opacity-0 group-hover:opacity-100 transition-all">
           {!(icon.pageId === page.id && icon.icon) && !page.icon && (
-            <div onClick={updateRandomIcon} className="flex items-center w-fit py-1 px-2 cursor-pointer rounded-[6px] hover:bg-[#f3f3f3] transition-colors">
+            <div onClick={updateRandomIcon} className="flex items-center w-fit py-1 px-2 cursor-pointer rounded-[6px] hover:bg-[#f3f3f3] dark:hover:bg-[#2d2d2d] transition-colors">
               <div>{icons.emoji}</div>
-              <span className="text-[#9B9A97] text-[14px]">Add icon</span>
+              <span className="text-[#9B9A97] dark:text-[#6b6b68] text-[14px]">Add icon</span>
             </div>
           )}
           {!page.coverUrl && (
-            <div onClick={updateRandomImage} className="flex items-center w-fit py-1 px-2 cursor-pointer rounded-[6px] hover:bg-[#f3f3f3] transition-colors">
+            <div onClick={updateRandomImage} className="flex items-center w-fit py-1 px-2 cursor-pointer rounded-[6px] hover:bg-[#f3f3f3] dark:hover:bg-[#2d2d2d] transition-colors">
               <div>{icons.image}</div>
-              <span className="text-[#9B9A97] text-[14px]">Add cover</span>
+              <span className="text-[#9B9A97] dark:text-[#6b6b68] text-[14px]">Add cover</span>
             </div>
           )}
         </div>
@@ -88,7 +88,7 @@ export default function NotoPageTitleEditor({ page }: NotoPageTitleEditorProps) 
       {
         !page.isArchived && page.auth_id === user?.id
           ? <Input
-            className="border-none shadow-none focus:!outline-none focus:!ring-0 placeholder:text-[#E1E1E0] placeholder:text-[40px] placeholder:font-bold h-[80px] !text-[40px] !text-[#37352F] font-bold p-0 !rounded-none"
+            className="border-none shadow-none focus:!outline-none focus:!ring-0 placeholder:text-[#E1E1E0] dark:placeholder:text-[#3a3a3a] placeholder:text-[40px] placeholder:font-bold h-[80px] !text-[40px] !text-[#37352F] dark:!text-[#e8e8e7] dark:!bg-transparent font-bold p-0 !rounded-none"
             onChange={(e) => {
               const value = e.target.value;
               debouncedTitleChange(value);
@@ -98,7 +98,7 @@ export default function NotoPageTitleEditor({ page }: NotoPageTitleEditorProps) 
             placeholder="New Page"
           /> :
           <Input
-            className="border-none shadow-none focus:!outline-none focus:!ring-0 placeholder:text-[#E1E1E0] placeholder:text-[40px] placeholder:font-bold h-[80px] !text-[40px] !text-[#37352F] font-bold p-0 !rounded-none"
+            className="border-none shadow-none focus:!outline-none focus:!ring-0 placeholder:text-[#E1E1E0] dark:placeholder:text-[#3a3a3a] placeholder:text-[40px] placeholder:font-bold h-[80px] !text-[40px] !text-[#37352F] dark:!text-[#e8e8e7] dark:!bg-transparent font-bold p-0 !rounded-none"
             readOnly
             value={document.title || ""}
             placeholder="New Page"

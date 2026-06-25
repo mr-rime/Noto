@@ -95,7 +95,7 @@ export default function PublishMenu({ children, page }: { children: React.ReactN
                         {
                             isPending ? <Button className="cursor-pointer bg-[#2383E2] rounded-[5px] flex items-center justify-center h-[28px] hover:bg-[#0077D4] w-full">
                                 Publishing...
-                            </Button> : <Button onClick={handlePublish} className="cursor-pointer bg-[#2383E2] rounded-[5px] flex items-center justify-center h-[28px] hover:bg-[#0077D4] w-full">
+                            </Button> : <Button onClick={handlePublish} className="cursor-pointer bg-[#2383E2] rounded-[5px] flex items-center justify-center h-[28px] hover:bg-[#0077D4] w-full dark:text-white">
                                 Publish
                             </Button>
                         }

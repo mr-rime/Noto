@@ -12,7 +12,16 @@ import SidebarResizer from "./sidebar-resizer";
 
 export default async function Sidebar() {
     const user = await auth()
-    const pages = await getRootPages(user.userId!)
+    if (!user.userId) {
+        return (
+            <style dangerouslySetInnerHTML={{ __html: `
+                :root {
+                    --sidebar-width: 0px !important;
+                }
+            `}} />
+        )
+    }
+    const pages = await getRootPages(user.userId)
     return (
         <aside className="bg-[#F8F8F7] w-[var(--sidebar-width,300px)] min-h-screen shadow-sidebar p-1 z-20 fixed top-0 group/sidebar">
             <SidebarResizer />

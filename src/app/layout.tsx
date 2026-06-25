@@ -5,6 +5,7 @@ import {
 import "./globals.css";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 import QueryProvider from "@/components/query-provider";
+import ThemeProvider from "@/components/theme-provider";
 import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
@@ -29,7 +30,9 @@ export default function RootLayout({
         >
           <EdgeStoreProvider>
             <QueryProvider>
-              {children}
+              <ThemeProvider>
+                {children}
+              </ThemeProvider>
             </QueryProvider>
           </EdgeStoreProvider>
           <Toaster position="bottom-center" />

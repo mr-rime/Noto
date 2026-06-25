@@ -21,15 +21,15 @@ const ComposeIcon = () => (
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         className="compose"
-        style={{ width: 22, height: 22, display: "block", fill: "rgb(55, 53, 47)", flexShrink: 0 }}
+        style={{ width: 22, height: 22, display: "block", flexShrink: 0 }}
     >
         <path
             d="m16.774 4.341-.59.589-1.109-1.11.596-.594a.784.784 0 0 1 1.103 0c.302.302.302.8 0 1.102zM8.65 12.462l6.816-6.813-1.11-1.11-6.822 6.808a1.1 1.1 0 0 0-.236.393l-.289.932c-.052.196.131.38.315.314l.932-.288a.9.9 0 0 0 .394-.236"
-            fill="#37352F"
+            fill="currentColor"
         />
         <path
             d="M4.375 6.25c0-1.036.84-1.875 1.875-1.875H11a.625.625 0 1 0 0-1.25H6.25A3.125 3.125 0 0 0 3.125 6.25v7.5c0 1.726 1.4 3.125 3.125 3.125h7.5c1.726 0 3.125-1.4 3.125-3.125V9a.625.625 0 1 0-1.25 0v4.75c0 1.036-.84 1.875-1.875 1.875h-7.5a1.875 1.875 0 0 1-1.875-1.875z"
-            fill="#37352F"
+            fill="currentColor"
         />
     </svg>
 );
@@ -40,7 +40,7 @@ const PlusSmallIcon = () => (
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
         className="plusSmall"
-        style={{ width: 17, height: 17, display: "block", fill: "rgba(71, 70, 68, 0.6)", flexShrink: 0 }}
+        style={{ width: 17, height: 17, display: "block", flexShrink: 0 }}
         width="17"
         height="17"
         aria-hidden="true"
@@ -49,7 +49,7 @@ const PlusSmallIcon = () => (
         <path
             d="M8 2.3a.7.7 0 0 0-.7.7v4.3H3a.7.7 0 1 0 0 1.4h4.3V13a.7.7 0 1 0 1.4 0V8.7H13a.7.7 0 1 0 0-1.4H8.7V3a.7.7 0 0 0-.7-.7"
             fillOpacity="0.6"
-            fill="#474644"
+            fill="currentColor"
         />
     </svg>
 );
@@ -59,7 +59,7 @@ const EllipsisSmallIcon = () => (
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 13"
         className="ellipsisSmall"
-        style={{ width: 17, height: 17, display: "block", fill: "rgba(71, 70, 68, 0.6)", flexShrink: 0 }}
+        style={{ width: 17, height: 17, display: "block", flexShrink: 0 }}
         width="17"
         height="17"
         aria-hidden="true"
@@ -68,7 +68,7 @@ const EllipsisSmallIcon = () => (
         <path
             d="M3.2 6.725a1.275 1.275 0 1 0 0 2.55 1.275 1.275 0 0 0 0-2.55m4.8 0a1.275 1.275 0 1 0 0 2.55 1.275 1.275 0 0 0 0-2.55m4.8 0a1.275 1.275 0 1 0 0 2.55 1.275 1.275 0 0 0 0-2.55"
             fillOpacity="0.6"
-            fill="#474644"
+            fill="currentColor"
         />
     </svg>
 );
@@ -90,7 +90,7 @@ const EmojiIcon = () => (
             clipRule="evenodd"
             d="M7 0c3.861 0 7 3.139 7 7s-3.139 7-7 7-7-3.139-7-7 3.139-7 7-7zM3.561 5.295a1.027 1.027 0 1 0 2.054 0 1.027 1.027 0 0 0-2.054 0zm5.557 1.027a1.027 1.027 0 1 1 0-2.054 1.027 1.027 0 0 1 0 2.054zm1.211 2.816a.77.77 0 0 0-.124-1.087.786.786 0 0 0-1.098.107c-.273.407-1.16.958-2.254.958-1.093 0-1.981-.55-2.244-.945a.788.788 0 0 0-1.107-.135.786.786 0 0 0-.126 1.101c.55.734 1.81 1.542 3.477 1.542 1.668 0 2.848-.755 3.476-1.541z"
             fillOpacity={0.5}
-            fill="#37352F"
+            fill="currentColor"
         />
     </svg>
 )
@@ -103,7 +103,7 @@ const ImageIcon = () => (
         }}>
         <path fillRule="evenodd" clipRule="evenodd"
             d="M2 0a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm0 12h10L8.5 5.5l-2 4-2-1.5L2 12z"
-            fillOpacity={0.5} fill="#37352F" />
+            fillOpacity={0.5} fill="currentColor" />
     </svg>
 )
 
@@ -167,13 +167,12 @@ const DuplicateIcon = () => {
             height="20"
             style={{
                 display: "block",
-                fill: "rgb(50, 48, 44)",
                 flexShrink: 0,
             }}
         >
             <path
                 d="M4.5 2.375A2.125 2.125 0 0 0 2.375 4.5V12c0 1.174.951 2.125 2.125 2.125h1.625v1.625c0 1.174.951 2.125 2.125 2.125h7.5a2.125 2.125 0 0 0 2.125-2.125v-7.5a2.125 2.125 0 0 0-2.125-2.125h-1.625V4.5A2.125 2.125 0 0 0 12 2.375zm8.375 3.75H8.25A2.125 2.125 0 0 0 6.125 8.25v4.625H4.5A.875.875 0 0 1 3.625 12V4.5c0-.483.392-.875.875-.875H12c.483 0 .875.392.875.875zm-5.5 2.125c0-.483.392-.875.875-.875h7.5c.483 0 .875.392.875.875v7.5a.875.875 0 0 1-.875.875h-7.5a.875.875 0 0 1-.875-.875z"
-                fill="#32302C"
+                fill="currentColor"
             />
         </svg>
     );
@@ -181,10 +180,10 @@ const DuplicateIcon = () => {
 const ArrowTurnUpRightIcon = () => (
     <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
         role="graphics-symbol" viewBox="0 0 20 20" className="arrowTurnUpRight"
-        style={{ width: 20, height: 20, display: "block", fill: "rgb(50, 48, 44)", flexShrink: 0 }} width={20} height={20} >
+        style={{ width: 20, height: 20, display: "block", flexShrink: 0 }} width={20} height={20} >
         <path
             d="M12.408 4.792a.625.625 0 0 1 .884-.884l4.4 4.4a.625.625 0 0 1 0 .884l-4.4 4.4a.625.625 0 0 1-.884-.884l3.333-3.333H5.25a.875.875 0 0 0-.875.875v5a.625.625 0 1 1-1.25 0v-5c0-1.173.951-2.125 2.125-2.125h10.491z"
-            fill="#32302C" />
+            fill="currentColor" />
     </svg >
 )
 
@@ -201,21 +200,20 @@ const LinkIcon = () => {
             height="20"
             style={{
                 display: "block",
-                fill: "rgb(50, 48, 44)",
                 flexShrink: 0,
             }}
         >
             <path
                 d="M10.61 3.61a3.776 3.776 0 0 1 5.34 0l.367.368a3.776 3.776 0 0 1 0 5.34l-1.852 1.853a.625.625 0 1 1-.884-.884l1.853-1.853a2.526 2.526 0 0 0 0-3.572l-.368-.367a2.526 2.526 0 0 0-3.572 0L9.641 6.347a.625.625 0 0 1-.883-.884z"
-                fill="#32302C"
+                fill="currentColor"
             />
             <path
                 d="M12.98 6.949a.625.625 0 0 1 0 .883l-5.45 5.449a.625.625 0 1 1-.884-.884l5.448-5.448a.625.625 0 0 1 .884 0"
-                fill="#32302C"
+                fill="currentColor"
             />
             <path
                 d="M6.348 8.757a.625.625 0 0 1 0 .884l-1.853 1.853a2.526 2.526 0 0 0 0 3.572l.367.367a2.526 2.526 0 0 0 3.572 0l1.853-1.852a.625.625 0 1 1 .884.883l-1.853 1.853a3.776 3.776 0 0 1-5.34 0l-.367-.367a3.776 3.776 0 0 1 0-5.34l1.853-1.853a.625.625 0 0 1 .884 0"
-                fill="#32302C"
+                fill="currentColor"
             />
         </svg>
     );
@@ -265,7 +263,7 @@ const ChevronDownRoundedThick = () => (
             width: '14px',
             height: '14px',
             display: 'block',
-            fill: 'rgba(55, 53, 47, 0.35)',
+            fill: 'currentColor',
             flexShrink: 0,
             transition: 'transform 200ms ease-out',
             transform: 'rotateZ(-90deg)',
@@ -274,7 +272,7 @@ const ChevronDownRoundedThick = () => (
         width="12" height="12">
         <path
             d="M6.02734 8.80274C6.27148 8.80274 6.47168 8.71484 6.66211 8.51465L10.2803 4.82324C10.4268 4.67676 10.5 4.49609 10.5 4.28125C10.5 3.85156 10.1484 3.5 9.72363 3.5C9.50879 3.5 9.30859 3.58789 9.15234 3.74902L6.03223 6.9668L2.90722 3.74902C2.74609 3.58789 2.55078 3.5 2.33105 3.5C1.90137 3.5 1.55469 3.85156 1.55469 4.28125C1.55469 4.49609 1.62793 4.67676 1.77441 4.82324L5.39258 8.51465C5.58789 8.71973 5.78808 8.80274 6.02734 8.80274Z"
-            fill-opacity="0.35" fill="#37352F" />
+            fillOpacity="0.35" fill="currentColor" />
     </svg>
 )
 

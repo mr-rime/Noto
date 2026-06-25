@@ -82,17 +82,17 @@ export default function ControlMenu({ children, onOpen, open, pageId }: ControlM
             <PopoverTrigger>
                 {children}
             </PopoverTrigger>
-            <PopoverContent className=" w-[265px] min-w-[180px] max-w-[calc(-24px + 100vw)] shadow-none translate-x-2 relative !z-20 p-1 rounded-[6px] ">
-                <div onClick={handleCopyLink} className="hover:bg-[#F3F3F3] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
+            <PopoverContent className=" w-[265px] min-w-[180px] max-w-[calc(-24px + 100vw)] shadow-none translate-x-2 relative !z-20 p-1 rounded-[6px] dark:text-[#e8e8e7]">
+                <div onClick={handleCopyLink} className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
                     {icons.link} <span>Copy link</span>
                 </div>
-                <div onClick={handleDuplicate} className="hover:bg-[#F3F3F3] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
+                <div onClick={handleDuplicate} className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
                     {icons.duplicate} <span>Duplicate</span>
                 </div>
-                <div onClick={handleMoveTo} className="hover:bg-[#F3F3F3] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
+                <div onClick={handleMoveTo} className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px]">
                     {icons.arrowTurnUpRight} <span>Move to</span>
                 </div>
-                <div onClick={handleArchive} className="hover:bg-[#F3F3F3] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px] hover:text-[#EB5757] ">
+                <div onClick={handleArchive} className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] h-[28px] flex items-center space-x-3 text-[14px] px-[8px] hover:text-[#EB5757] ">
                     {icons.trash} <span>Move to trash</span>
                 </div>
             </PopoverContent>

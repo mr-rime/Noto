@@ -198,6 +198,22 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  --bn-colors-editor-text: #e8e8e7;
+  --bn-colors-editor-background: #1F1F1F;
+  --bn-colors-menu-text: #e8e8e7;
+  --bn-colors-menu-background: #1f1f1f;
+  --bn-colors-tooltip-text: #e8e8e7;
+  --bn-colors-tooltip-background: #2d2d2d;
+  --bn-colors-hovered-text: #e8e8e7;
+  --bn-colors-hovered-background: #2d2d2d;
+  --bn-colors-selected-text: #1F1F1F;
+  --bn-colors-selected-background: #e8e8e7;
+  --bn-colors-disabled-text: #5e5c57;
+  --bn-colors-disabled-background: #2d2d2d;
+  --bn-colors-shadow: #3a3a3a;
+  --bn-colors-border: #2d2d2d;
+  --bn-colors-side-menu: #5e5c57;
 }
 
 @layer base {
@@ -222,10 +238,49 @@
     color: #37352F !important;
   }
 
+  .dark ::selection {
+    background: #2f5378 !important;
+    color: #e8e8e7 !important;
+  }
+
   em-emoji-picker {
     --category-icon-size: 24px;
     --font-size: 14px;
     height: 300px;
     max-height: 70vh;
+  }
+
+  /* Dark mode overrides for hardcoded sidebar colors */
+  .dark aside {
+    background-color: #1a1a1a !important;
+  }
+
+  .dark .hover\:bg-\[\#F0F0EF\]:hover,
+  .dark .hover\:bg-\[\#E8E8E8\]:hover {
+    background-color: #2d2d2d !important;
+  }
+
+  .dark .text-\[\#5E5C57\] {
+    color: #9e9a97 !important;
+  }
+
+  .dark .text-\[\#37352F\] {
+    color: #e8e8e7 !important;
+  }
+
+  .dark .text-\[\#9E9A97\] {
+    color: #6b6b68 !important;
+  }
+
+  .dark .bg-\[\#F8F8F7\] {
+    background-color: #1a1a1a !important;
+  }
+
+  .dark .bg-white {
+    background-color: #1F1F1F !important;
+  }
+
+  .dark .shadow-sidebar {
+    box-shadow: inset -1px 0px 0px 0px rgba(255, 255, 255, 0.06) !important;
   }
 }

@@ -9,11 +9,11 @@ import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 
-export const createPage = async ({ title, content, type, auth_id, id, currentPageId }: PageType & { currentPageId?: string }) => {
+export const createPage = async ({ title, content, type, auth_id, id, currentPageId, coverUrl, icon }: PageType & { currentPageId?: string }) => {
     try {
         const data = await db
             .insert(pagesTable)
-            .values({ id: id!, auth_id: auth_id!, title: title!, content, type })
+            .values({ id: id!, auth_id: auth_id!, title: title!, content, type, coverUrl, icon })
             .returning();
 
         revalidatePath(`/pages`);

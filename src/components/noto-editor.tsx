@@ -6,6 +6,7 @@ import "@blocknote/mantine/style.css";
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useEdgeStore } from "@/lib/edgestore";
+import { useResolvedTheme } from "@/hooks/use-resolved-theme";
 
 export type BlockType = {
     id: string;
@@ -29,6 +30,7 @@ type NotoEditorProps = {
 
 export default function NotoEditor({ autoFocus, setIsEditorFocused, initialContent, setDocuments, editable }: NotoEditorProps) {
     const { edgestore } = useEdgeStore();
+    const resolvedTheme = useResolvedTheme();
 
     const handleUpload = async (file: File) => {
         const response = await edgestore.publicFiles.upload({
@@ -70,7 +72,7 @@ export default function NotoEditor({ autoFocus, setIsEditorFocused, initialConte
 
     return <BlockNoteView
         editor={editor}
-        theme={"light"}
+        theme={resolvedTheme}
         title="Noto Editor"
         autoFocus={autoFocus}
         onBlur={() => setIsEditorFocused(false)}
