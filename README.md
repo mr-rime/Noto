@@ -1,3 +1,3 @@
 # Noto App
 
-![alt text](image.png)
+![alt text](noto.png)
