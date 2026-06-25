@@ -1,4 +1,5 @@
 import { icons } from "@/constants/icons";
+import Link from "next/link";
 import PagesList from "./pages-list";
 import SidebarItem from "./sidebar-item";
 import UserAvatar from "./user-avatar";
@@ -17,11 +18,13 @@ export default async function Sidebar() {
             <SidebarResizer />
             <div>
                 <UserAvatar />
-                <SidebarItem>
-                    <div className="flex items-center space-x-1 text-[#5E5C57] font-medium text-[13px]">
-                        <span>{icons.home}</span> <span>Home</span>
-                    </div>
-                </SidebarItem>
+                <Link href="/pages" prefetch>
+                    <SidebarItem>
+                        <div className="flex items-center space-x-1 text-[#5E5C57] font-medium text-[13px]">
+                            <span>{icons.home}</span> <span>Home</span>
+                        </div>
+                    </SidebarItem>
+                </Link>
 
                 <SearchItem />
             </div>

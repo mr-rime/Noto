@@ -27,7 +27,6 @@ export default function SidebarResizer() {
         if (savedWidth) {
             document.documentElement.style.setProperty('--sidebar-width', savedWidth);
         } else {
-            // Default width
             document.documentElement.style.setProperty('--sidebar-width', '300px');
         }
 

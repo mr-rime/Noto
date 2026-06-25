@@ -75,3 +75,12 @@ export const getFirstPage = cache(async (userId: string) => {
         )
     })
 })
+
+export const getRecentPages = cache(async (userId: string, limit = 10) => {
+    return await db.query.pagesTable.findMany({
+        where: (pages, { eq }) =>
+            eq(pages.auth_id, userId),
+        orderBy: (pages, { desc }) => [desc(pages.updated_at)],
+        limit,
+    })
+})
