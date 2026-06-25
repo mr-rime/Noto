@@ -2,9 +2,8 @@ name: Keep Database Alive
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 0 */4 * *'
   workflow_dispatch: # Allows manual trigger from GitHub UI
-
 jobs:
   ping-db:
     runs-on: ubuntu-latest
