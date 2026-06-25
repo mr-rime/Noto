@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import SearchModal from "./search-modal"
+import MoveToModal from "./move-to-modal"
 import { PageType } from "@/types"
 
 export default function ModalProvider({ pages }: { pages: PageType[] }) {
@@ -16,6 +17,7 @@ export default function ModalProvider({ pages }: { pages: PageType[] }) {
     return (
         <>
             <SearchModal pages={pages} />
+            <MoveToModal />
         </>
     )
 }

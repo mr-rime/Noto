@@ -84,21 +84,7 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
     onOpen()
   }
 
-  const doAddPageInside = useCallback(async (e: React.MouseEvent) => {
-    e.preventDefault()
-    await mutateAsync({
-      auth_id: user?.id!,
-      parentId: id!
-    })
-  }, [user, id, mutateAsync])
-
-  const onCollapse = (e: React.MouseEvent) => {
-    e.preventDefault()
-    setIsCollapsed(prev => !prev)
-  }
-
-
-  const memoizedChildrenList = useMemo(() => {
+  const resolvedChildren = useMemo(() => {
     const liveChildren = pagesList.pagesList
       ? (function findChildren(pages: PageType[]): PageType[] | undefined {
           for (const p of pages) {
@@ -110,14 +96,34 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
           }
         })(pagesList.pagesList)
       : children
+    return liveChildren ?? children
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagesList.pagesList, id, children])
 
-    const resolvedChildren = liveChildren ?? children
+  const doAddPageInside = useCallback(async (e: React.MouseEvent) => {
+    e.preventDefault()
+    if (resolvedChildren && resolvedChildren.length >= 4) {
+      toast.error("You can only have 4 pages inside a page")
+      return
+    }
+    await mutateAsync({
+      auth_id: user?.id!,
+      parentId: id!
+    })
+  }, [user, id, mutateAsync, resolvedChildren])
 
+  const onCollapse = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setIsCollapsed(prev => !prev)
+  }
+
+
+  const memoizedChildrenList = useMemo(() => {
     if (!resolvedChildren || resolvedChildren.length === 0) return <div className="text-[#989793] text-[13px] w-fit mt-1 ml-3 select-none">
       No pages inside
     </div>
     return resolvedChildren.map((page) => <NotoPage key={page.id} {...page} depth={depth + 1} />)
-  }, [pagesList.pagesList, id, depth])
+  }, [resolvedChildren, depth])
 
   return (
     <>
@@ -158,10 +164,12 @@ export default function NotoPage({ id, title, icon, children, depth = 0 }: NotoP
                 </div>
               </ControlMenu>
             </NotoTooltip>
-            {depth < 3 && (
-              <NotoTooltip content="Add a page inside">
+            {depth < 4 && (
+              <NotoTooltip content={resolvedChildren && resolvedChildren.length >= 4 ? "Page limit reached (max 4)" : "Add a page inside"}>
                 <div
-                  className="hover:bg-[#E8E8E8] h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100"
+                  className={cn("h-[20px] w-[20px] rounded-[4px] flex items-center justify-center transition-all opacity-0 group-hover:opacity-100",
+                    resolvedChildren && resolvedChildren.length >= 4 ? "opacity-30 cursor-not-allowed" : "hover:bg-[#E8E8E8] cursor-pointer"
+                  )}
                   onClick={doAddPageInside}
                 >
                   {icons.plus}

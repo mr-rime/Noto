@@ -46,3 +46,10 @@ export const replaceOptimisticChildInTree = (pages: PageType[], parentId: string
         return page;
     });
 };
+
+export const removeNodeFromTree = (pages: PageType[], idToRemove: string): PageType[] => {
+    return pages.filter(page => page.id !== idToRemove).map(page => ({
+        ...page,
+        children: page.children ? removeNodeFromTree(page.children, idToRemove) : []
+    }));
+};

@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query"
 import { deletePage, updatePage } from "@/actions"
 import { cn } from "@/lib/cn"
 import { useUser } from "@clerk/nextjs"
+import { usePagesList, addOptimisticChildToTree } from "@/hooks/use-pages-list"
 
 interface TrashContentProps {
     trash: PageType[]
@@ -73,18 +74,28 @@ function TrashItem({ page, setOpen }: {
         setOpen(false)
     }
 
-    const handleRestore = async () => {
-        try {
+    const handleRestore = async (e: React.MouseEvent) => {
+        e.stopPropagation()
+        
+        const previous = usePagesList.getState().pagesList
+        if (page.parent_id) {
+             usePagesList.getState().setPagesList(addOptimisticChildToTree(previous, page.parent_id, page))
+        } else {
+             usePagesList.getState().setPagesList([...previous, page])
+        }
 
+        try {
             await updatePageMutation({ id: page.id!, isArchived: false, auth_id: user?.id! })
+        } catch {
+             usePagesList.getState().setPagesList(previous)
         } finally {
             router.push(`/pages/${page.id}`)
             setOpen(false)
         }
-
     }
 
-    const handleDelete = async () => {
+    const handleDelete = async (e: React.MouseEvent) => {
+        e.stopPropagation()
         try {
             await deletePageMutation({ id: page.id! })
         } finally {

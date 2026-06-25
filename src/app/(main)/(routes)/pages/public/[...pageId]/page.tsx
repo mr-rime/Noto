@@ -2,7 +2,7 @@
 import DeletedBanner from "@/components/deleted-banner";
 import NotFound from "@/components/not-found";
 import NotoPageContent from "@/components/noto-page-content";
-import NotoPageCover from "@/components/noto-page-cover";
+import CoverWrapper from "@/components/cover-wrapper";
 import NotoPageHeader from "@/components/noto-page-header";
 import NotoPageIcon from "@/components/noto-page-icon";
 import { cn } from "@/lib/cn";
@@ -28,14 +28,10 @@ export default async function page({ params }: { params: Promise<{ pageId: strin
                 {
                     page.isArchived && <DeletedBanner />
                 }
-                {
-                    page?.coverUrl && <NotoPageCover page={page as any} />
-                }
-
-                <div className={cn("relative w-fit mx-auto flex items-start justify-center ", page?.coverUrl ? "mt-5" : "mt-28")}>
+                <CoverWrapper page={page as any}>
                     <NotoPageIcon page={page as any} />
                     <NotoPageContent pageId={pageId} page={page as any} userId={user?.id!} />
-                </div>
+                </CoverWrapper>
             </div>
         </div>
     )

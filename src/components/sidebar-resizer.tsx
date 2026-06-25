@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { GripVertical } from 'lucide-react';
 
 export default function SidebarResizer() {
     const isResizing = useRef(false);
@@ -41,7 +42,7 @@ export default function SidebarResizer() {
 
     return (
         <div
-            className="absolute top-0 right-0 w-1.5 h-full cursor-col-resize hover:bg-[#c9c9c9] transition-colors z-30 opacity-0 group-hover/sidebar:opacity-100"
+            className="absolute top-0 right-0 w-2 h-full cursor-col-resize hover:bg-[#c9c9c9] transition-colors z-30 flex items-center justify-center group/resizer"
             onMouseDown={(e) => {
                 e.preventDefault();
                 isResizing.current = true;
