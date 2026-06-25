@@ -50,7 +50,7 @@ export default function NotoPageHeader({ page }: { page: PageType }) {
                 !page.isArchived && page.auth_id === user?.id ? <>
                     {
                         isEditable ?
-                            <Input onBlur={() => setIsEditable(false)} onChange={handleChange} autoFocus defaultValue={page.title || "New Page"} className="w-[100px] h-[25px] rounded-[6px]" placeholder="New Page" />
+                            <Input onBlur={() => setIsEditable(false)} onChange={handleChange} autoFocus defaultValue={page.title || "New Page"} className="w-[100px] h-[25px] rounded-[6px] dark:text-white" placeholder="New Page" />
                             :
                             <div onClick={() => setIsEditable(true)} className="hover:bg-[#F0F0EF] dark:hover:bg-[#2d2d2d] transition-colors cursor-pointer rounded-[6px] w-fit max-w-[150px] truncate py-[2px] px-3 space-x-1 text-[15px] dark:text-white">
                                 <span>

@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Landing() {
     return (
-        <section className="min-h-screen bg-white text-[#37352F]">
+        <section className="min-h-screen">
             <LandingHeader />
             <div className="max-w-5xl mx-auto w-full min-h-[600px] flex items-center justify-between">
                 <div className="flex items-center justify-between w-full max-lg:flex-col-reverse px-4">

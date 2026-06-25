@@ -2,9 +2,11 @@
 
 import { useEffect } from 'react';
 import { useTheme } from '@/hooks/use-theme';
+import { usePathname } from 'next/navigation';
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
     const { theme } = useTheme();
+    const pathname = usePathname();
 
     useEffect(() => {
         const root = document.documentElement;
@@ -16,6 +18,11 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             }
         };
 
+        if (pathname === '/') {
+            applyTheme(false);
+            return;
+        }
+
         if (theme === 'system') {
             const mq = window.matchMedia('(prefers-color-scheme: dark)');
             applyTheme(mq.matches);
@@ -25,7 +32,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
         } else {
             applyTheme(theme === 'dark');
         }
-    }, [theme]);
+    }, [theme, pathname]);
 
     return <>{children}</>;
 }
