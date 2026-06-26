@@ -82,7 +82,7 @@ export default async function HomePage() {
     if (newUser) {
         await createPage({
             id: crypto.randomUUID(),
-            title: "Welcome to Noto!",
+            title: "Welcome",
             icon: "👋",
             coverUrl: "https://images.unsplash.com/photo-1506744626753-14d6433e5c9d?q=80&w=2000&auto=format&fit=crop",
             auth_id: user?.id!

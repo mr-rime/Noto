@@ -15,7 +15,7 @@ export default function NotoPageCover({ page }: { page: PageType }) {
             <div className="absolute top-5 right-32">
                 <CoverImage>
                     {
-                        !page.isArchived && page.auth_id === user?.id && <div className=" w-fit h-fit flex items-center justify-center opacity-0 group-hover:opacity-100 bg-white hover:bg-[#EFEFEE]  text-[#7D7C78] text-[14px] px-2 py-1 rounded-sm cursor-pointer transition-all duration-200 ease-in-out z-10 border border-[#EDEDEC]">
+                        !page.isArchived && page.auth_id === user?.id && <div className=" w-fit h-fit flex items-center justify-center opacity-0 group-hover:opacity-100 bg-white dark:bg-[#1f1f1f] hover:bg-[#EFEFEE] dark:hover:bg-[#2d2d2d] text-[#7D7C78] dark:text-[#e8e8e7] text-[14px] px-2 py-1 rounded-sm cursor-pointer transition-all duration-200 ease-in-out z-10 border border-[#EDEDEC] dark:border-[#3a3a3a]">
                             Change cover
                         </div>
                     }

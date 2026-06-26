@@ -21,6 +21,7 @@ type FlatPage = PageType & { breadcrumb: string }
 function flattenTree(pages: PageType[], ancestors: string[] = []): FlatPage[] {
     const result: FlatPage[] = []
     for (const page of pages) {
+        if (page.isArchived) continue;
         result.push({ ...page, breadcrumb: ancestors.join(" / ") })
         if (page.children?.length) {
             result.push(...flattenTree(page.children, [...ancestors, page.title || "Untitled"]))
@@ -42,7 +43,7 @@ export default function SearchModal({ pages }: { pages: PageType[] }) {
     const visiblePages = useMemo(() => {
         if (!query.trim()) {
             // No search query — show only root pages (no breadcrumb clutter)
-            return sourcePages.map(p => ({ ...p, breadcrumb: "" })) as FlatPage[]
+            return sourcePages.filter(p => !p.isArchived).map(p => ({ ...p, breadcrumb: "" })) as FlatPage[]
         }
         // Actively searching — show all pages including nested ones
         return flattenTree(sourcePages)
@@ -82,7 +83,7 @@ export default function SearchModal({ pages }: { pages: PageType[] }) {
                     {visiblePages.map((page) => (
                         <CommandItem
                             key={page.id}
-                            value={page.title || "Untitled"}
+                            value={`${page.id}-${page.title || "Untitled"}`}
                             onSelect={() => onSelect(page.id!)}
                         >
                             <span className="shrink-0">

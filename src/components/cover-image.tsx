@@ -95,21 +95,21 @@ export function CoverImage({ children }: CoverImageProps) {
     return (
         <Popover open={open} onOpenChange={onOpen}>
             <PopoverTrigger>{children}</PopoverTrigger>
-            <PopoverContent className="relative w-[540px] max-w-[calc(100vw-24px)] h-full max-h-[485px] z-10 -left-[70px]">
+            <PopoverContent className="relative w-[540px] max-w-[calc(100vw-24px)] h-full max-h-[485px] z-10 -left-[70px] dark:text-[#e8e8e7]">
                 <div className="my-5">
-                    <div className="flex items-center justify-between w-full border-b border-[#F0F0EF]">
+                    <div className="flex items-center justify-between w-full border-b border-[#F0F0EF] dark:border-[#3a3a3a]">
                         <div className="flex items-center space-x-1 w-full">
                             {["gallery", "upload"].map((option) => (
                                 <div
                                     key={option}
                                     className={cn(
-                                        "border-[#37352F]",
-                                        tab === option ? "border-b-2" : "text-[#37352f80]"
+                                        "border-[#37352F] dark:border-[#e8e8e7]",
+                                        tab === option ? "border-b-2 text-[#37352F] dark:text-[#e8e8e7]" : "text-[#37352f80] dark:text-[#e8e8e780]"
                                     )}
                                 >
                                     <div
                                         onClick={() => handleTabChange(option as "gallery" | "upload")}
-                                        className="hover:bg-[#F3F3F3] transition-colors rounded-[6px] h-[28px] text-[14px] inline-flex items-center cursor-pointer px-[8px] mb-1"
+                                        className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] transition-colors rounded-[6px] h-[28px] text-[14px] inline-flex items-center cursor-pointer px-[8px] mb-1"
                                     >
                                         {option.charAt(0).toUpperCase() + option.slice(1)}
                                     </div>
@@ -117,7 +117,7 @@ export function CoverImage({ children }: CoverImageProps) {
                             ))}
                         </div>
 
-                        <div onClick={handleRemoveCover} className="hover:bg-[#F3F3F3] text-[#37352f80] transition-colors rounded-[6px] h-[28px] text-[14px] inline-flex items-center cursor-pointer px-[8px] mb-1">
+                        <div onClick={handleRemoveCover} className="hover:bg-[#F3F3F3] dark:hover:bg-[#2d2d2d] text-[#37352f80] dark:text-[#e8e8e780] transition-colors rounded-[6px] h-[28px] text-[14px] inline-flex items-center cursor-pointer px-[8px] mb-1">
                             Remove
                         </div>
                     </div>
@@ -128,7 +128,7 @@ export function CoverImage({ children }: CoverImageProps) {
                         <div className="w-full">
                             {Object.entries(GALLERY).map(([categoryName, images]) => (
                                 <div key={categoryName}>
-                                    <div className="text-[#7D7C78] text-[14px] mb-2 font-medium">
+                                    <div className="text-[#7D7C78] dark:text-[#9B9A97] text-[14px] mb-2 font-medium">
                                         {categoryName}
                                     </div>
 
